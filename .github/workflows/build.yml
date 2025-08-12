@@ -7,13 +7,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    # Kjør alle "run"-steg i undermappa der package.json ligger
+    defaults:
+      run:
+        working-directory: lappeland-label-configurator
+
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
 
       - run: npm install
       - run: npm run build
@@ -22,4 +27,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dist
-          path: dist/
+          path: lappeland-label-configurator/dist/
